@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagamento Aprovado - OmniMatrix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .grid-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 162, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 162, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00a2ff;
+            border-radius: 50%;
+            animation: particleFloat 10s infinite ease-in-out;
+            box-shadow: 0 0 10px #00a2ff;
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 80%; top: 40%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; top: 60%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 70%; top: 80%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 50%; top: 30%; animation-delay: 3s; }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translate(0, 0); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translate(100px, -100px); }
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            z-index: 10;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 0 20px 60px rgba(0, 162, 255, 0.4);
+            animation: scaleIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .checkmark {
+            animation: checkmarkDraw 0.8s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes checkmarkDraw {
+            to { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00a2ff 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 200, 100, 0.15);
+            border: 1px solid rgba(0, 200, 100, 0.4);
+            border-radius: 20px;
+            font-size: 14px;
+            color: #00c864;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 162, 255, 0.2);
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #00a2ff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 162, 255, 0.4);
+            border: 1px solid rgba(0, 162, 255, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 162, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #00a2ff;
+            color: #00a2ff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 162, 255, 0.1);
+        }
+
+        .next-steps {
+            background: rgba(0, 162, 255, 0.05);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 162, 255, 0.2);
+            margin-top: 40px;
+        }
+
+        .next-steps h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #00a2ff;
+        }
+
+        .steps-list {
+            text-align: left;
+            list-style: none;
+        }
+
+        .steps-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: #ccc;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .steps-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .success-icon { width: 100px; height: 100px; font-size: 50px; }
+            .info-box, .next-steps { padding: 20px; }
+            .action-buttons { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <div class="success-icon">
+            <span class="checkmark">✓</span>
+        </div>
+
+        <div class="status-badge">✓ PAGAMENTO APROVADO</div>
+
+        <h1>Pagamento Confirmado!</h1>
+
+        <p class="message">
+            Seu pagamento foi processado com sucesso. Baixe o Loader e faça login.
+        </p>
+
+        <div class="info-box">
+            <div class="info-item">
+                <span class="info-label">Status</span>
+                <span class="info-value">✓ Aprovado</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Produto</span>
+                <span class="info-value">OmniMatrix - Recoil Master</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Processado em</span>
+                <span class="info-value" id="timestamp">Agora</span>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="https://guaranihub.com:5056/api/download" class="btn btn-primary">Baixar OmniMatrix</a>
+            <a href="https://pubg.guaranihub.com" class="btn btn-secondary">Voltar ao site</a>
+        </div>
+
+        <div class="next-steps">
+            <h3>Próximos Passos</h3>
+            <ul class="steps-list">
+                <li>Faça o download do OmniMatrix usando o botão acima</li>
+                <li>Execute o instalador e siga as instruções na tela</li>
+                <li>Use sua chave de ativação para desbloquear todos os recursos</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Display current timestamp
+        const now = new Date();
+        const options = { 
+            day: '2-digit', 
+            month: '2-digit', 
+            year: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        };
+        document.getElementById('timestamp').textContent = now.toLocaleDateString('pt-BR', options);
+
+        // Get payment info from URL if available
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentId = urlParams.get('payment_id');
+        const orderId = urlParams.get('order_id');
+        
+        if (paymentId || orderId) {
+            console.log('Payment ID:', paymentId);
+            console.log('Order ID:', orderId);
+        }
+    </script>
+</body>
+</html>
