@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OmniMatrix - Recoil Master PUBG</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #0a0a0a;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        width: 100%;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 162, 255, 0.2);
+        animation: slideDown 0.8s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(0, 162, 255, 0.3);
+      }
+
+      nav a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-left: 30px;
+        transition: all 0.3s ease;
+        position: relative;
+        font-weight: 500;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(0, 162, 255, 0.1) 0%,
+          rgba(10, 10, 10, 1) 70%
+        );
+      }
+
+      .grid-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(
+            rgba(0, 162, 255, 0.1) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(0, 162, 255, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: gridMove 20s linear infinite;
+        opacity: 0.3;
+      }
+
+      @keyframes gridMove {
+        0% {
+          transform: perspective(500px) rotateX(60deg) translateY(0);
+        }
+        100% {
+          transform: perspective(500px) rotateX(60deg) translateY(50px);
+        }
+      }
+
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #00a2ff;
+        border-radius: 50%;
+        animation: particleFloat 10s infinite ease-in-out;
+        box-shadow: 0 0 10px #00a2ff;
+      }
+
+      .particle:nth-child(1) {
+        left: 10%;
+        top: 20%;
+        animation-delay: 0s;
+      }
+      .particle:nth-child(2) {
+        left: 80%;
+        top: 40%;
+        animation-delay: 2s;
+      }
+      .particle:nth-child(3) {
+        left: 30%;
+        top: 60%;
+        animation-delay: 4s;
+      }
+      .particle:nth-child(4) {
+        left: 70%;
+        top: 80%;
+        animation-delay: 1s;
+      }
+      .particle:nth-child(5) {
+        left: 50%;
+        top: 30%;
+        animation-delay: 3s;
+      }
+
+      @keyframes particleFloat {
+        0%,
+        100% {
+          transform: translate(0, 0);
+          opacity: 0;
+        }
+        10%,
+        90% {
+          opacity: 1;
+        }
+        50% {
+          transform: translate(100px, -100px);
+        }
+      }
+
+      .hero-content {
+        text-align: center;
+        z-index: 10;
+        animation: fadeInUp 1s ease-out;
+        max-width: 900px;
+        padding: 0 20px;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(0, 162, 255, 0.1);
+        border: 1px solid rgba(0, 162, 255, 0.3);
+        border-radius: 20px;
+        font-size: 14px;
+        color: #00a2ff;
+        margin-bottom: 20px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .hero-content h1 {
+        font-size: 72px;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #00a2ff 0%, #ffffff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 60px rgba(0, 162, 255, 0.5);
+        font-weight: 900;
+        letter-spacing: -2px;
+      }
+
+      .hero-content .subtitle {
+        font-size: 28px;
+        color: #00a2ff;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+
+      .hero-content p {
+        font-size: 18px;
+        color: #b0b0b0;
+        margin-bottom: 40px;
+        line-height: 1.6;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 18px 45px;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 162, 255, 0.4);
+        border: 1px solid rgba(0, 162, 255, 0.5);
+        font-size: 16px;
+        letter-spacing: 0.5px;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 162, 255, 0.6);
+        background: linear-gradient(135deg, #0066ff 0%, #00a2ff 100%);
+      }
+
+      .cta-button.secondary {
+        background: transparent;
+        border: 2px solid #00a2ff;
+        color: #00a2ff;
+      }
+
+      .cta-button.secondary:hover {
+        background: rgba(0, 162, 255, 0.1);
+      }
+
+      /* Features Section */
+      .features {
+        padding: 120px 50px;
+        background: #0f0f0f;
+        position: relative;
+      }
+
+      .features::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #00a2ff, transparent);
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .section-badge {
+        display: inline-block;
+        padding: 6px 16px;
+        background: rgba(0, 162, 255, 0.1);
+        border: 1px solid rgba(0, 162, 255, 0.3);
+        border-radius: 20px;
+        font-size: 12px;
+        color: #00a2ff;
+        margin-bottom: 15px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .features h2 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-out;
+      }
+
+      .features .description {
+        color: #888;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 40px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 162, 255, 0.1);
+        transition: all 0.4s ease;
+        animation: fadeInUp 1s ease-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 162, 255, 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .feature-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .feature-card:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(0, 162, 255, 0.5);
+        box-shadow: 0 20px 40px rgba(0, 162, 255, 0.2);
+      }
+
+      .feature-card:hover::before {
+        opacity: 1;
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(0, 162, 255, 0.3);
+      }
+
+      .feature-card h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #fff;
+      }
+
+      .feature-card p {
+        color: #999;
+        line-height: 1.7;
+        font-size: 15px;
+      }
+
+      /* Preview Section */
+      .preview-section {
+        padding: 120px 50px;
+        background: #0a0a0a;
+      }
+
+      .preview-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .preview-image {
+        background: rgba(0, 162, 255, 0.05);
+        border: 1px solid rgba(0, 162, 255, 0.2);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0, 162, 255, 0.1);
+        margin-top: 40px;
+      }
+
+      /* Carousel */
+      .carousel {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 162, 255, 0.3);
+        background: #000;
+      }
+
+      /* Side gradients to hint there is more content */
+      .carousel::before,
+      .carousel::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 56px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .carousel::before {
+        left: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(10, 10, 10, 0.9),
+          rgba(10, 10, 10, 0)
+        );
+      }
+
+      .carousel::after {
+        right: 0;
+        background: linear-gradient(
+          270deg,
+          rgba(10, 10, 10, 0.9),
+          rgba(10, 10, 10, 0)
+        );
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.6s ease;
+        will-change: transform;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        user-select: none;
+        -webkit-user-drag: none;
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: #000;
+      }
+
+      .carousel-slide iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(0, 162, 255, 0.4);
+        color: #fff;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+
+      .carousel-btn:hover {
+        background: rgba(0, 162, 255, 0.4);
+      }
+
+      .carousel-btn.prev {
+        left: 12px;
+      }
+      .carousel-btn.next {
+        right: 12px;
+      }
+
+      .carousel-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        z-index: 2;
+      }
+
+      .carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(0, 162, 255, 0.5);
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .carousel-dot.active {
+        background: #00a2ff;
+        transform: scale(1.15);
+      }
+
+      /* Swipe hint badge */
+      .swipe-hint {
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        font-size: 12px;
+        color: #d8eeff;
+        background: rgba(0, 162, 255, 0.12);
+        border: 1px solid rgba(0, 162, 255, 0.4);
+        border-radius: 999px;
+        backdrop-filter: blur(6px);
+        z-index: 3;
+        animation: hintPulse 1.8s ease-in-out infinite;
+      }
+
+      .swipe-hint .chevrons {
+        color: #00a2ff;
+      }
+
+      @keyframes hintPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 162, 255, 0.35);
+        }
+        50% {
+          box-shadow: 0 0 0 8px rgba(0, 162, 255, 0);
+        }
+      }
+
+      /* Specs Section */
+      .specs {
+        padding: 120px 50px;
+        background: #0a0a0a;
+      }
+
+      .specs-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .specs-image {
+        background: rgba(0, 162, 255, 0.05);
+        border: 1px solid rgba(0, 162, 255, 0.2);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0, 162, 255, 0.1);
+      }
+
+      .specs-image img {
+        width: 100%;
+        border-radius: 12px;
+        filter: brightness(0.9);
+      }
+
+      .specs-content h2 {
+        font-size: 42px;
+        margin-bottom: 25px;
+      }
+
+      .specs-content p {
+        color: #888;
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 30px;
+      }
+
+      .specs-list {
+        list-style: none;
+      }
+
+      .specs-list li {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: #ccc;
+        font-size: 15px;
+      }
+
+      .specs-list li::before {
+        content: "✓";
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 100px 50px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 162, 255, 0.1) 0%,
+          rgba(0, 102, 255, 0.1) 100%
+        );
+        text-align: center;
+        border-top: 1px solid rgba(0, 162, 255, 0.2);
+        border-bottom: 1px solid rgba(0, 162, 255, 0.2);
+      }
+
+      .cta-section h2 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      .cta-section p {
+        color: #888;
+        font-size: 18px;
+        margin-bottom: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Footer */
+      footer {
+        padding: 50px 50px 30px;
+        text-align: center;
+        background: #0a0a0a;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .footer-logo {
+        font-size: 24px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .footer-links a {
+        color: #666;
+        text-decoration: none;
+        margin-left: 30px;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #00a2ff;
+      }
+
+      footer p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      /* Compatibility Section */
+      .compatibility-section {
+        padding: 120px 50px;
+        background: #0f0f0f;
+        position: relative;
+      }
+
+      .compatibility-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #00a2ff, transparent);
+      }
+
+      .compatibility-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .compatibility-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .compat-card {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 40px 30px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 162, 255, 0.1);
+        transition: all 0.4s ease;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .compat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 162, 255, 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .compat-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(0, 162, 255, 0.5);
+        box-shadow: 0 20px 40px rgba(0, 162, 255, 0.2);
+      }
+
+      .compat-card:hover::before {
+        opacity: 1;
+      }
+
+      .compat-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      .compat-card h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .compat-card p {
+        color: #999;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .compat-badge {
+        display: inline-block;
+        padding: 6px 16px;
+        background: rgba(0, 162, 255, 0.15);
+        border: 1px solid rgba(0, 162, 255, 0.3);
+        border-radius: 20px;
+        font-size: 12px;
+        color: #00a2ff;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .requirements-box {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 50px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 162, 255, 0.1);
+      }
+
+      .requirements-box h3 {
+        font-size: 28px;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #fff;
+      }
+
+      .requirements-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .req-item {
+        padding: 20px;
+        background: rgba(0, 162, 255, 0.03);
+        border-radius: 10px;
+        border-left: 3px solid #00a2ff;
+        color: #ccc;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .req-item strong {
+        color: #00a2ff;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 968px) {
+        .hero-content h1 {
+          font-size: 48px;
+        }
+
+        .hero-content .subtitle {
+          font-size: 22px;
+        }
+
+        .hero-content p {
+          font-size: 16px;
+        }
+
+        header {
+          padding: 20px;
+        }
+
+        nav a {
+          margin-left: 15px;
+          font-size: 14px;
+        }
+
+        .features,
+        .specs,
+        .cta-section,
+        .compatibility-section {
+          padding: 80px 20px;
+        }
+
+        .features h2,
+        .cta-section h2 {
+          font-size: 36px;
+        }
+
+        .specs-container {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .requirements-box {
+          padding: 30px 20px;
+        }
+
+        .requirements-list {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .footer-links a {
+          margin: 0 15px;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cta-button {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      @media (max-width: 968px) {
+        .hero-content h1 {
+          font-size: 48px;
+        }
+
+        .hero-content .subtitle {
+          font-size: 22px;
+        }
+
+        .hero-content p {
+          font-size: 16px;
+        }
+
+        header {
+          padding: 20px;
+        }
+
+        nav a {
+          margin-left: 15px;
+          font-size: 14px;
+        }
+
+        .features,
+        .specs,
+        .cta-section {
+          padding: 80px 20px;
+        }
+
+        .features h2,
+        .cta-section h2 {
+          font-size: 36px;
+        }
+
+        .specs-container {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .footer-links a {
+          margin: 0 15px;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cta-button {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">OmniMatrix</div>
+      <nav>
+        <a href="#home">Início</a>
+        <a href="#features">Recursos</a>
+        <a href="#specs">Especificações</a>
+        <a href="#download">Download</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="grid-background"></div>
+      <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">🎮 NOVO LANÇAMENTO</div>
+        <h1>OmniMatrix</h1>
+        <p class="subtitle">Recoil Master para PUBG</p>
+        <p>
+          O macro profissional para PUBG com menu sobreposto in-game. Ajuste
+          tudo sem minimizar, compense o recoil com precisão e faça loot em
+          segundos. Transforme cada partida em vantagem competitiva real.
+        </p>
+        <div class="cta-buttons">
+          <a href="https://guaranihub.com:5056/api/download" class="cta-button"
+            >Baixar agora</a
+          >
+          <a href="#features" class="cta-button secondary">Ver recursos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="section-header">
+        <div class="section-badge">Recursos</div>
+        <h2>Funcionalidades Avançadas</h2>
+        <p class="description">
+          Soluções pensadas para aumentar sua precisão, acelerar decisões e
+          converter desempenho em vitórias consistentes
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Menu sobreposto in-game</h3>
+          <p>
+            O menu aparece diretamente no PUBG. Ajuste o recoil, altere presets
+            e configure tudo em tempo real, sem sair da partida. Enquanto outros
+            exigem minimizar, o OmniMatrix mantém você em jogo — sempre um passo
+            à frente.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Fast loot automático</h3>
+          <p>
+            Saia na frente com o loot mais rápido do lobby. Colete com um clique
+            e equipe-se em segundos. Enquanto os outros ainda vasculham o chão,
+            você já está pronto para o próximo abate.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>8 presets instantâneos</h3>
+          <p>
+            Salve até 8 configurações de armas e troque instantaneamente durante
+            a partida. M416, AKM ou qualquer outra — cada uma com recoil
+            calibrado. Um toque, e o controle acompanha você.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h3>Disparo rápido (M16/Mutant)</h3>
+          <p>
+            Converta armas semi-automáticas em máquinas de dano. M16A4 e Mutant
+            disparam até 3× mais rápido que o normal, com precisão consistente.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3>Atalhos personalizáveis (hotkeys)</h3>
+          <p>
+            Configure tudo do seu jeito: teclas, funções, força de recoil.
+            Personalize cada detalhe para reagir mais rápido e manter controle
+            total com um toque.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Controle de recoil avançado</h3>
+          <p>
+            Tecnologia de compensação que estabiliza cada disparo. Tiros firmes,
+            agrupados e letais — ideais para headshots consistentes em qualquer
+            distância.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preview Section -->
+    <section class="preview-section">
+      <div class="preview-container">
+        <div class="section-header">
+          <div class="section-badge">Prévia</div>
+          <h2>Interface do menu in-game</h2>
+          <p class="description">
+            Controle total com ajustes instantâneos e interface limpa, 100%
+            integrada ao jogo.
+          </p>
+        </div>
+        <div class="preview-image">
+          <div class="carousel" id="previewCarousel">
+            <button
+              class="carousel-btn prev"
+              aria-label="Anterior"
+              data-dir="-1"
+            >
+              ❮
+            </button>
+            <div class="carousel-track">
+              <div class="carousel-slide">
+                <iframe
+                  src="https://www.youtube.com/embed/QbM4wNa1s9g?si=vW1VQSrCqYfdT-bG&rel=0&modestbranding=1&playsinline=1"
+                  title="Preview 1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="carousel-slide">
+                <iframe
+                  src="https://www.youtube.com/embed/gY_zM_HSFuM?si=JVJp2Cu_Ydqi8_L_&rel=0&modestbranding=1&playsinline=1"
+                  title="Preview 2"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="carousel-slide">
+                <iframe
+                  src="https://www.youtube.com/embed/3B_fRJJoGFo?si=z-yktYjt4kvPwtK5&rel=0&modestbranding=1&playsinline=1"
+                  title="Preview 3"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="carousel-slide">
+                <iframe
+                  src="https://www.youtube.com/embed/RKIdROcAR04?si=osgoohwfB6wIPAmc&rel=0&modestbranding=1&playsinline=1"
+                  title="Preview 4"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="carousel-slide">
+                <iframe
+                  src="https://www.youtube.com/embed/HNFZqfbozQw?si=GKn1XlFDsKh996V3&rel=0&modestbranding=1&playsinline=1"
+                  title="Preview 5"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+            <button class="carousel-btn next" aria-label="Próximo" data-dir="1">
+              ❯
+            </button>
+            <div class="carousel-dots" role="tablist" aria-label="Slides">
+              <div
+                class="carousel-dot active"
+                data-index="0"
+                role="tab"
+                aria-selected="true"
+                aria-controls="slide-1"
+              ></div>
+              <div
+                class="carousel-dot"
+                data-index="1"
+                role="tab"
+                aria-selected="false"
+                aria-controls="slide-2"
+              ></div>
+              <div
+                class="carousel-dot"
+                data-index="2"
+                role="tab"
+                aria-selected="false"
+                aria-controls="slide-3"
+              ></div>
+              <div
+                class="carousel-dot"
+                data-index="3"
+                role="tab"
+                aria-selected="false"
+                aria-controls="slide-3"
+              ></div>
+              <div
+                class="carousel-dot"
+                data-index="4"
+                role="tab"
+                aria-selected="false"
+                aria-controls="slide-3"
+              ></div>
+            </div>
+            <div class="swipe-hint" aria-hidden="true">
+              <span>Arraste para o lado</span>
+              <span class="chevrons">❯❯</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="specs" id="specs">
+      <div class="specs-container">
+        <div class="specs-image">
+          <img
+            src="pubgpreview2.png"
+            alt="OmniMatrix Menu Preview"
+            style="
+              width: 100%;
+              border-radius: 12px;
+              border: 1px solid rgba(0, 162, 255, 0.3);
+            "
+          />
+        </div>
+        <div class="specs-content">
+          <div class="section-badge">Especificações</div>
+          <h2>Recoil Master para PUBG</h2>
+          <p>
+            O primeiro macro com menu dentro do jogo. Enquanto outros softwares
+            exigem minimizar o PUBG para cada ajuste, o OmniMatrix surge sobre a
+            tela com uma tecla de atalho. Configure tudo em segundos sem perder
+            tempo — e sem se expor desprotegido.
+          </p>
+          <ul class="specs-list">
+            <li>
+              <strong>Menu overlay:</strong> Aparece sobre o jogo — nunca
+              minimiza novamente
+            </li>
+            <li>
+              <strong>Fast loot:</strong> Pegue itens instantaneamente com um
+              botão
+            </li>
+            <li>
+              <strong>8 presets salvos:</strong> Uma configuração ideal para
+              cada arma
+            </li>
+            <li>
+              <strong>Hotkeys in-game:</strong> Mude sem abrir menus — apenas
+              com teclas
+            </li>
+            <li>
+              <strong>Disparo rápido:</strong> M16A4 e Mutant até 3× mais
+              rápidas
+            </li>
+            <li>
+              <strong>Controle de recoil:</strong> Redução significativa do
+              recuo
+            </li>
+            <li>
+              <strong>Ajuste em tempo real:</strong> Page Up/Down alteram a
+              força durante a partida
+            </li>
+            <li>
+              <strong>Multi-botão:</strong> Funciona com qualquer botão do
+              mouse/teclado
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compatibility Section -->
+    <section class="compatibility-section">
+      <div class="compatibility-container">
+        <div class="section-header">
+          <div class="section-badge">Compatibilidade</div>
+          <h2>Funciona em Qualquer Setup</h2>
+          <p class="description">
+            Compatível com todos os sistemas e periféricos mais populares
+          </p>
+        </div>
+
+        <div class="compatibility-grid">
+          <div class="compat-card">
+            <div class="compat-icon">💻</div>
+            <h3>Windows</h3>
+            <p>Windows 11 & 10</p>
+            <span class="compat-badge">Totalmente Compatível</span>
+          </div>
+          <div class="compat-card">
+            <div class="compat-icon">🖱️</div>
+            <h3>Qualquer Mouse</h3>
+            <p>Logitech, Razer, SteelSeries, HyperX e todos os outros</p>
+            <span class="compat-badge">Universal</span>
+          </div>
+          <div class="compat-card">
+            <div class="compat-icon">⌨️</div>
+            <h3>Qualquer Teclado</h3>
+            <p>Mecânico, membrana, gaming ou office - todos funcionam</p>
+            <span class="compat-badge">Universal</span>
+          </div>
+        </div>
+
+        <div class="requirements-box">
+          <h3>Requisitos Mínimos do Sistema</h3>
+          <div class="requirements-list">
+            <div class="req-item">
+              <strong>Sistema Operacional:</strong> Windows 10/11 (64-bit)
+            </div>
+            <div class="req-item">
+              <strong>Processador:</strong> Intel Core i3 ou AMD equivalente
+            </div>
+            <div class="req-item">
+              <strong>Memória RAM:</strong> 4GB ou superior
+            </div>
+            <div class="req-item">
+              <strong>Armazenamento:</strong> 50MB de espaço livre
+            </div>
+            <div class="req-item">
+              <strong>Periféricos:</strong> Mouse e Teclado (qualquer marca)
+            </div>
+            <div class="req-item">
+              <strong>Conexão:</strong> Internet para ativação inicial
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="download">
+      <h2>Chega de perder por desvantagem</h2>
+      <p>
+        Enquanto você luta contra o recoil e perde tempo em menus, seus
+        adversários já usam o OmniMatrix. Nivele o jogo agora.
+      </p>
+      <a href="https://guaranihub.com:5056/api/download" class="cta-button"
+        >Baixar gratuitamente</a
+      >
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">OmniMatrix</div>
+        <div class="footer-links">
+          <a href="#home">Início</a>
+          <a href="#features">Recursos</a>
+          <a href="#specs">Especificações</a>
+          <a href="#download">Download</a>
+        </div>
+      </div>
+      <p>&copy; 2025 OmniMatrix. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+      (function () {
+        var carousel = document.getElementById("previewCarousel");
+        if (!carousel) return;
+
+        var track = carousel.querySelector(".carousel-track");
+        var slides = Array.prototype.slice.call(
+          carousel.querySelectorAll(".carousel-slide")
+        );
+        var dots = Array.prototype.slice.call(
+          carousel.querySelectorAll(".carousel-dot")
+        );
+        var prevBtn = carousel.querySelector(".carousel-btn.prev");
+        var nextBtn = carousel.querySelector(".carousel-btn.next");
+
+        var index = 0;
+        var autoMs = 60000;
+        var timer = null;
+
+        function updatePosition() {
+          track.style.transform = "translateX(" + -index * 100 + "%)";
+          dots.forEach(function (d, i) {
+            var isActive = i === index;
+            d.classList.toggle("active", isActive);
+            d.setAttribute("aria-selected", String(isActive));
+          });
+        }
+
+        function resetIframeAt(idx) {
+          var iframe = slides[idx] && slides[idx].querySelector("iframe");
+          if (!iframe) return;
+          var current = iframe.src;
+          iframe.src = current; // reload to stop playback
+        }
+
+        function goTo(newIndex) {
+          if (newIndex === index) return;
+          resetIframeAt(index);
+          index = (newIndex + slides.length) % slides.length;
+          updatePosition();
+        }
+
+        function next() {
+          goTo(index + 1);
+        }
+        function prev() {
+          goTo(index - 1);
+        }
+
+        function startAuto() {
+          stopAuto();
+          timer = setInterval(next, autoMs);
+        }
+
+        function stopAuto() {
+          if (timer) clearInterval(timer);
+          timer = null;
+        }
+
+        // Buttons
+        if (prevBtn)
+          prevBtn.addEventListener("click", function () {
+            prev();
+            startAuto();
+          });
+        if (nextBtn)
+          nextBtn.addEventListener("click", function () {
+            next();
+            startAuto();
+          });
+
+        // Dots
+        dots.forEach(function (dot) {
+          dot.addEventListener("click", function () {
+            var idx = Number(dot.getAttribute("data-index")) || 0;
+            goTo(idx);
+            startAuto();
+          });
+        });
+
+        // Hide swipe hint after interaction or timeout
+        var hint = carousel.querySelector(".swipe-hint");
+        function hideHint() {
+          if (!hint) return;
+          hint.style.opacity = "0";
+          hint.style.transition = "opacity 300ms ease";
+          setTimeout(function () {
+            if (hint && hint.parentNode) {
+              hint.parentNode.removeChild(hint);
+            }
+          }, 350);
+          hint = null;
+        }
+        if (hint) {
+          setTimeout(hideHint, 6000);
+          ["click", "touchstart", "mousedown", "keydown"].forEach(function (
+            evt
+          ) {
+            carousel.addEventListener(evt, hideHint, { once: true });
+          });
+        }
+
+        // Pause on hover
+        carousel.addEventListener("mouseenter", stopAuto);
+        carousel.addEventListener("mouseleave", startAuto);
+
+        // Touch/drag swipe
+        var startX = 0;
+        var currentX = 0;
+        var isDragging = false;
+
+        function onTouchStart(e) {
+          isDragging = true;
+          startX = e.touches ? e.touches[0].clientX : e.clientX;
+          currentX = startX;
+          stopAuto();
+        }
+
+        function onTouchMove(e) {
+          if (!isDragging) return;
+          currentX = e.touches ? e.touches[0].clientX : e.clientX;
+          var dx = currentX - startX;
+          var percent = (dx / carousel.clientWidth) * 100;
+          track.style.transition = "none";
+          track.style.transform =
+            "translateX(" + (-(index * 100) + percent) + "%)";
+        }
+
+        function onTouchEnd() {
+          if (!isDragging) return;
+          isDragging = false;
+          track.style.transition = "";
+          var dx = currentX - startX;
+          var threshold = carousel.clientWidth * 0.15;
+          if (dx > threshold) {
+            prev();
+          } else if (dx < -threshold) {
+            next();
+          } else {
+            updatePosition();
+          }
+          startAuto();
+        }
+
+        track.addEventListener("mousedown", onTouchStart);
+        window.addEventListener("mousemove", onTouchMove);
+        window.addEventListener("mouseup", onTouchEnd);
+        track.addEventListener("touchstart", onTouchStart, { passive: true });
+        track.addEventListener("touchmove", onTouchMove, { passive: true });
+        track.addEventListener("touchend", onTouchEnd);
+
+        // Init
+        updatePosition();
+        startAuto();
+      })();
+    </script>
+  </body>
+</html>
