@@ -269,6 +269,19 @@
         background: rgba(0, 162, 255, 0.1);
       }
 
+      .cta-note {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #888;
+        text-align: center;
+        font-style: italic;
+        line-height: 1.5;
+      }
+
+      .cta-note strong {
+        color: #00a2ff;
+      }
+
       /* Features Section */
       .features {
         padding: 120px 50px;
@@ -852,6 +865,215 @@
         font-size: 14px;
       }
 
+      /* Pricing Section */
+      .pricing-section {
+        padding: 120px 50px;
+        background: #0a0a0a;
+        position: relative;
+      }
+
+      .pricing-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #00a2ff, transparent);
+      }
+
+      .pricing-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .pricing-card {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 50px 40px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 162, 255, 0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .pricing-card:nth-child(2) {
+        animation-delay: 0.2s;
+        border-color: rgba(0, 162, 255, 0.3);
+        background: rgba(0, 162, 255, 0.03);
+      }
+
+      .pricing-card:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      .pricing-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 162, 255, 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-15px);
+        border-color: rgba(0, 162, 255, 0.6);
+        box-shadow: 0 25px 50px rgba(0, 162, 255, 0.3);
+      }
+
+      .pricing-card:hover::before {
+        opacity: 1;
+      }
+
+      .pricing-card.featured {
+        border-color: rgba(0, 162, 255, 0.5);
+        background: rgba(0, 162, 255, 0.05);
+        transform: scale(1.05);
+      }
+
+      .pricing-card.featured::after {
+        content: "MAIS POPULAR";
+        position: absolute;
+        top: 20px;
+        right: -30px;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        color: #fff;
+        padding: 6px 40px;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        transform: rotate(45deg);
+        box-shadow: 0 4px 15px rgba(0, 162, 255, 0.4);
+      }
+
+      .pricing-plan-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .pricing-plan-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .pricing-price {
+        margin: 30px 0;
+        position: relative;
+      }
+
+      .pricing-currency {
+        font-size: 24px;
+        color: #00a2ff;
+        font-weight: 600;
+        vertical-align: top;
+        margin-right: 5px;
+      }
+
+      .pricing-amount {
+        font-size: 64px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #00a2ff 0%, #ffffff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .pricing-period {
+        font-size: 16px;
+        color: #888;
+        margin-top: 10px;
+        font-weight: 500;
+      }
+
+      .pricing-features {
+        list-style: none;
+        margin: 40px 0;
+        text-align: left;
+      }
+
+      .pricing-features li {
+        padding: 12px 0;
+        color: #ccc;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .pricing-features li::before {
+        content: "✓";
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        flex-shrink: 0;
+        color: #fff;
+      }
+
+      .pricing-button {
+        display: inline-block;
+        width: 100%;
+        padding: 18px 30px;
+        background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 162, 255, 0.4);
+        border: 1px solid rgba(0, 162, 255, 0.5);
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        margin-top: 20px;
+        text-transform: uppercase;
+      }
+
+      .pricing-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 162, 255, 0.6);
+        background: linear-gradient(135deg, #0066ff 0%, #00a2ff 100%);
+      }
+
+      .pricing-card.featured .pricing-button {
+        background: linear-gradient(135deg, #00ff88 0%, #00a2ff 100%);
+        box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+      }
+
+      .pricing-card.featured .pricing-button:hover {
+        background: linear-gradient(135deg, #00a2ff 0%, #00ff88 100%);
+        box-shadow: 0 15px 40px rgba(0, 255, 136, 0.6);
+      }
+
       @media (max-width: 968px) {
         .hero-content h1 {
           font-size: 48px;
@@ -877,13 +1099,105 @@
         .features,
         .specs,
         .cta-section,
-        .compatibility-section {
+        .compatibility-section,
+        .pricing-section {
           padding: 80px 20px;
+        }
+
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          gap: 25px;
+        }
+
+        .pricing-card.featured {
+          transform: scale(1);
+        }
+
+        .pricing-amount {
+          font-size: 48px;
         }
 
         .features h2,
         .cta-section h2 {
           font-size: 36px;
+        }
+
+        /* Carousel Mobile Improvements */
+        .preview-section {
+          padding: 80px 10px;
+        }
+
+        .preview-container {
+          max-width: 100%;
+          padding: 0;
+        }
+
+        .preview-image {
+          padding: 15px 5px;
+        }
+
+        .carousel {
+          min-height: 200px;
+          border-radius: 8px;
+          width: 100%;
+        }
+
+        .carousel-slide {
+          min-height: 200px;
+          aspect-ratio: 16 / 9;
+        }
+
+        .carousel-slide iframe {
+          min-height: 200px;
+        }
+
+        .carousel-btn {
+          width: 56px;
+          height: 56px;
+          font-size: 22px;
+          background: rgba(0, 162, 255, 0.9);
+          border: 2px solid rgba(0, 162, 255, 0.7);
+          box-shadow: 0 4px 20px rgba(0, 162, 255, 0.6);
+        }
+
+        .carousel-btn:active {
+          transform: translateY(-50%) scale(0.95);
+        }
+
+        .carousel-btn.prev {
+          left: 8px;
+        }
+
+        .carousel-btn.next {
+          right: 8px;
+        }
+
+        .carousel::before,
+        .carousel::after {
+          width: 50px;
+        }
+
+        .carousel-dots {
+          bottom: 12px;
+          gap: 10px;
+        }
+
+        .carousel-dot {
+          width: 11px;
+          height: 11px;
+          cursor: pointer;
+        }
+
+        .carousel-dot.active {
+          transform: scale(1.4);
+          background: #00a2ff;
+        }
+
+        .swipe-hint {
+          font-size: 11px;
+          padding: 6px 10px;
+          right: 10px;
+          bottom: 10px;
         }
 
         .specs-container {
@@ -976,6 +1290,49 @@
           max-width: 300px;
         }
       }
+
+      @media (max-width: 480px) {
+        /* Extra Small Screens - Carousel Optimization */
+        .preview-section {
+          padding: 80px 5px;
+        }
+
+        .preview-container {
+          max-width: 100%;
+          padding: 0;
+        }
+
+        .carousel {
+          min-height: 180px;
+          width: 100%;
+        }
+
+        .carousel-slide {
+          min-height: 180px;
+        }
+
+        .carousel-slide iframe {
+          min-height: 180px;
+        }
+
+        .carousel-btn {
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+        }
+
+        .carousel-btn.prev {
+          left: 5px;
+        }
+
+        .carousel-btn.next {
+          right: 5px;
+        }
+
+        .preview-image {
+          padding: 10px 2px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -983,6 +1340,7 @@
       <div class="logo">OmniMatrix</div>
       <nav>
         <a href="#home">Início</a>
+        <a href="#pricing">Preços</a>
         <a href="#features">Recursos</a>
         <a href="#specs">Especificações</a>
         <a href="#download">Download</a>
@@ -1008,11 +1366,17 @@
           segundos. Transforme cada partida em vantagem competitiva real.
         </p>
         <div class="cta-buttons">
-          <a href="https://guaranihub.com:5056/api/downloadloader" class="cta-button"
-            >Baixar agora</a
+          <a
+            href="https://guaranihub.com:5056/api/downloadloader"
+            class="cta-button"
+            >Baixar e Comprar</a
           >
-          <a href="#features" class="cta-button secondary">Ver recursos</a>
+          <a href="#pricing" class="cta-button secondary">Ver Planos</a>
         </div>
+        <p class="cta-note">
+          <strong>Nota:</strong> O download é gratuito. A compra do plano é
+          realizada dentro do software após a instalação.
+        </p>
       </div>
     </section>
 
@@ -1254,6 +1618,76 @@
       </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+      <div class="pricing-container">
+        <div class="section-header">
+          <div class="section-badge">Preços</div>
+          <h2>Escolha Seu Plano</h2>
+          <p class="description">
+            Planos flexíveis para todos os jogadores. Acesso completo a todos os
+            recursos do OmniMatrix.
+          </p>
+        </div>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <span class="pricing-plan-icon">⚡</span>
+            <h3 class="pricing-plan-name">Diário</h3>
+            <div class="pricing-price">
+              <span class="pricing-currency">R$</span>
+              <span class="pricing-amount">25</span>
+              <div class="pricing-period">por 24 horas</div>
+            </div>
+            <ul class="pricing-features">
+              <li>Acesso completo a todos os recursos</li>
+              <li>Menu overlay in-game</li>
+              <li>8 presets salvos</li>
+              <li>Fast loot automático</li>
+              <li>Suporte prioritário</li>
+            </ul>
+            <a href="#download" class="pricing-button">Assinar Agora</a>
+          </div>
+          <div class="pricing-card featured">
+            <span class="pricing-plan-icon">🔥</span>
+            <h3 class="pricing-plan-name">Semanal</h3>
+            <div class="pricing-price">
+              <span class="pricing-currency">R$</span>
+              <span class="pricing-amount">45</span>
+              <div class="pricing-period">por 7 dias</div>
+            </div>
+            <ul class="pricing-features">
+              <li>Acesso completo a todos os recursos</li>
+              <li>Menu overlay in-game</li>
+              <li>8 presets salvos</li>
+              <li>Fast loot automático</li>
+              <li>Suporte prioritário</li>
+              <li>Economia de 36% vs diário</li>
+            </ul>
+            <a href="#download" class="pricing-button">Assinar Agora</a>
+          </div>
+          <div class="pricing-card">
+            <span class="pricing-plan-icon">💎</span>
+            <h3 class="pricing-plan-name">Mensal</h3>
+            <div class="pricing-price">
+              <span class="pricing-currency">R$</span>
+              <span class="pricing-amount">70</span>
+              <div class="pricing-period">por 30 dias</div>
+            </div>
+            <ul class="pricing-features">
+              <li>Acesso completo a todos os recursos</li>
+              <li>Menu overlay in-game</li>
+              <li>8 presets salvos</li>
+              <li>Fast loot automático</li>
+              <li>Suporte prioritário</li>
+              <li>Economia de 53% vs diário</li>
+              <li>Melhor custo-benefício</li>
+            </ul>
+            <a href="#download" class="pricing-button">Assinar Agora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Compatibility Section -->
     <section class="compatibility-section">
       <div class="compatibility-container">
@@ -1318,9 +1752,15 @@
         Enquanto você luta contra o recoil e perde tempo em menus, seus
         adversários já usam o OmniMatrix. Nivele o jogo agora.
       </p>
-      <a href="https://guaranihub.com:5056/api/downloadloader" class="cta-button"
-        >Baixar gratuitamente</a
+      <a
+        href="https://guaranihub.com:5056/api/downloadloader"
+        class="cta-button"
+        >Baixar Software</a
       >
+      <p class="cta-note">
+        <strong>Como funciona:</strong> Baixe o software gratuitamente e escolha
+        seu plano de assinatura após a instalação.
+      </p>
     </section>
 
     <footer>
@@ -1330,6 +1770,7 @@
           <a href="#home">Início</a>
           <a href="#features">Recursos</a>
           <a href="#specs">Especificações</a>
+          <a href="#pricing">Preços</a>
           <a href="#download">Download</a>
         </div>
       </div>
