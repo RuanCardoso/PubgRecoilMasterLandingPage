@@ -973,6 +973,7 @@
         );
         opacity: 0;
         transition: opacity 0.4s ease;
+        pointer-events: none;
       }
 
       .pricing-card:hover {
@@ -1098,6 +1099,8 @@
         letter-spacing: 0.5px;
         margin-top: 20px;
         text-transform: uppercase;
+        position: relative;
+        z-index: 1;
       }
 
       .pricing-button:hover {
@@ -1114,6 +1117,32 @@
       .pricing-card.featured .pricing-button:hover {
         background: linear-gradient(135deg, #00a2ff 0%, #00ff88 100%);
         box-shadow: 0 15px 40px rgba(0, 255, 136, 0.6);
+      }
+
+      /* Botão Diário - Verde */
+      .pricing-grid .pricing-card:first-child .pricing-button {
+        background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+        box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        border: 1px solid rgba(0, 255, 136, 0.5);
+      }
+
+      .pricing-grid .pricing-card:first-child .pricing-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 255, 136, 0.6);
+        background: linear-gradient(135deg, #00cc66 0%, #00ff88 100%);
+      }
+
+      /* Botão Mensal - Vermelho */
+      .pricing-grid .pricing-card:last-child .pricing-button {
+        background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+        box-shadow: 0 10px 30px rgba(255, 68, 68, 0.4);
+        border: 1px solid rgba(255, 68, 68, 0.5);
+      }
+
+      .pricing-grid .pricing-card:last-child .pricing-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(255, 68, 68, 0.6);
+        background: linear-gradient(135deg, #cc0000 0%, #ff4444 100%);
       }
 
       @media (max-width: 968px) {
@@ -1734,7 +1763,7 @@
               <li>Fast loot automático</li>
               <li>Suporte prioritário</li>
             </ul>
-            <a href="#download" class="pricing-button">Assinar Agora</a>
+            <a href="https://guaranihub.com:5056/api/downloadloader" class="pricing-button">Assinar Agora</a>
           </div>
           <div class="pricing-card featured">
             <span class="pricing-plan-icon">🔥</span>
@@ -1752,7 +1781,7 @@
               <li>Suporte prioritário</li>
               <li>Economia de 36% vs diário</li>
             </ul>
-            <a href="#download" class="pricing-button">Assinar Agora</a>
+            <a href="https://guaranihub.com:5056/api/downloadloader" class="pricing-button">Assinar Agora</a>
           </div>
           <div class="pricing-card">
             <span class="pricing-plan-icon">💎</span>
@@ -1771,9 +1800,13 @@
               <li>Economia de 53% vs diário</li>
               <li>Melhor custo-benefício</li>
             </ul>
-            <a href="#download" class="pricing-button">Assinar Agora</a>
+            <a href="https://guaranihub.com:5056/api/downloadloader" class="pricing-button">Assinar Agora</a>
           </div>
         </div>
+        <p class="cta-note" style="font-size: 16px; text-align: center; margin-top: 40px;">
+          <strong>Como funciona:</strong> Baixe o software gratuitamente e escolha
+          seu plano de assinatura após a instalação.
+        </p>
       </div>
     </section>
 
